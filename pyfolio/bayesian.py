@@ -113,12 +113,12 @@ def model_returns_normal(data, samples=500, progressbar=True):
         pm.Deterministic(
             'annual volatility',
             returns.distribution.variance**.5 *
-            np.sqrt(252))
+            np.sqrt(365))
         pm.Deterministic(
             'sharpe',
             returns.distribution.mean /
             returns.distribution.variance**.5 *
-            np.sqrt(252))
+            np.sqrt(365))
 
         trace = pm.sample(samples, progressbar=progressbar)
     return model, trace
@@ -156,11 +156,11 @@ def model_returns_t(data, samples=500, progressbar=True):
         returns = pm.StudentT('returns', nu=nu + 2, mu=mu, sd=sigma,
                               observed=data)
         pm.Deterministic('annual volatility',
-                         returns.distribution.variance**.5 * np.sqrt(252))
+                         returns.distribution.variance**.5 * np.sqrt(365))
 
         pm.Deterministic('sharpe', returns.distribution.mean /
                          returns.distribution.variance**.5 *
-                         np.sqrt(252))
+                         np.sqrt(365))
 
         trace = pm.sample(samples, progressbar=progressbar)
     return model, trace
@@ -235,17 +235,17 @@ def model_best(y1, y2, samples=1000, progressbar=True):
 
         pm.Deterministic('group1_annual_volatility',
                          returns_group1.distribution.variance**.5 *
-                         np.sqrt(252))
+                         np.sqrt(365))
         pm.Deterministic('group2_annual_volatility',
                          returns_group2.distribution.variance**.5 *
-                         np.sqrt(252))
+                         np.sqrt(365))
 
         pm.Deterministic('group1_sharpe', returns_group1.distribution.mean /
                          returns_group1.distribution.variance**.5 *
-                         np.sqrt(252))
+                         np.sqrt(365))
         pm.Deterministic('group2_sharpe', returns_group2.distribution.mean /
                          returns_group2.distribution.variance**.5 *
-                         np.sqrt(252))
+                         np.sqrt(365))
 
         trace = pm.sample(samples, progressbar=progressbar)
     return model, trace

@@ -168,7 +168,7 @@ class TestDrawdown(TestCase):
 
     def test_drawdown_overlaps(self):
         rand = np.random.RandomState(1337)
-        n_samples = 252 * 5
+        n_samples = 365 * 5
         spy_returns = pd.Series(
             rand.standard_t(3.1, n_samples),
             pd.date_range('2005-01-02', periods=n_samples),

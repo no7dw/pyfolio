@@ -259,7 +259,7 @@ def downside_risk(returns, required_return=0, period=DAILY):
 
 
 @deprecated(msg=DEPRECATION_WARNING)
-def sharpe_ratio(returns, risk_free=0, period=DAILY):
+def sharpe_ratio(returns, risk_free=0.03, period=DAILY):
     """
     Determines the Sharpe ratio of a strategy.
 
